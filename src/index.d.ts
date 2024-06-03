@@ -1,8 +1,8 @@
 interface IWords {
   day: number;
   title: string;
-  setneces: {
+  sentences: {
     english: string;
     korean: string;
-  };
+  }[];
 }
