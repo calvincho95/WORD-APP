@@ -17,7 +17,7 @@ const DailyWord: FC = () => {
   const navigate = useNavigate();
 
   const { state } = useLocation();
-  const { wordData }: { wordData: IWords } = state;
+  // const wordData = state.wordData ?? null;
 
   useEffect(() => {
     if (!state) {
@@ -27,16 +27,22 @@ const DailyWord: FC = () => {
     console.log(state);
   }, []);
 
+  if (!state) return <div>Loading...</div>;
+
   return (
     <Flex flexDir="column" maxW={768} mx="auto" minH="100vh">
-      <Text fontSize={24} fontWeight="bold" textAlign="center" mt={8}>
-        <Text display="inline-block" fontWeight="bold">
-          Day {wordData.day}
-        </Text>{" "}
-        - {wordData.title}
-      </Text>
+      <Flex
+        fontSize={24}
+        fontWeight="bold"
+        textAlign="center"
+        mt={8}
+        justifyContent="center"
+      >
+        <Text fontWeight="bold">Day {state.wordData.day}</Text> -{" "}
+        {state.wordData.title}
+      </Flex>
       <Accordion mt={8} allowMultiple>
-        {wordData.sentences.map((v, i) => (
+        {state.wordData.sentences.map((v: ISentence, i: number) => (
           <AccordionItem key={i}>
             <h2>
               <AccordionButton>
